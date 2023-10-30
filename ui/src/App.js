@@ -7,6 +7,7 @@ import searchService from './api/services/searchService';
 import MovieModel from './model/MovieModel';
 import EmptyResponseModel from './model/EmptyResponseModel';
 import PageableTable from './components/PageableTable';
+import MovieTableAdditionalFilter from './components/MovieTableAdditionalFilter';
 
 const MOVIE_TABLE_COLUMNS = [
   { field: 'originalTitle', headerName: 'Title', flex: 1, disableColumnMenu: true },
@@ -33,7 +34,7 @@ const App = () => {
   }
 
   return (
-    <PageableTable columns={MOVIE_TABLE_COLUMNS} apiCall={apiCall} />
+    <PageableTable columns={MOVIE_TABLE_COLUMNS} apiCall={apiCall} AdditionalFilterComponent={MovieTableAdditionalFilter} />
   );
 }
 

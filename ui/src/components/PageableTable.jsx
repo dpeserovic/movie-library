@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { DataGrid, GridPagination } from '@mui/x-data-grid';
 import MuiPagination from '@mui/material/Pagination';
 import { tablePaginationClasses } from '@mui/material';
-import TableSearch from './TableSearch';
+import Stack from '@mui/material/Stack';
+import TableFilter from './TableFilter';
 
-const PageableTable = ({ columns, apiCall }) => {
+const PageableTable = ({ columns, apiCall, AdditionalFilterComponent }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [tableData, setTableData] = useState(null);
     // FILTER
@@ -28,8 +29,8 @@ const PageableTable = ({ columns, apiCall }) => {
     return (
         <>
             {tableData != null ?
-                <div style={{ height: 800, width: '100%' }}>
-                    <TableSearch query={query} setQuery={setQuery} page={page} fetchData={fetchData} />
+                <Stack spacing={2} height={800} width={'100%'}>
+                    <TableFilter query={query} setQuery={setQuery} page={page} fetchData={fetchData} AdditionalFilterComponent={(props) => <AdditionalFilterComponent tableData={tableData} setTableData={setTableData} {...props} />} />
                     <DataGrid
                         columns={columns}
                         initialState={{
@@ -43,7 +44,7 @@ const PageableTable = ({ columns, apiCall }) => {
                         rowSelection={false}
                         slots={{ pagination: () => <CustomPagination tableData={tableData} setPage={setPage} /> }}
                     />
-                </div>
+                </Stack>
                 : null}
         </>
     );
