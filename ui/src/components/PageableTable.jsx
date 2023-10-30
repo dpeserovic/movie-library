@@ -4,6 +4,7 @@ import MuiPagination from '@mui/material/Pagination';
 import { tablePaginationClasses } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import TableFilter from './TableFilter';
+import BasicButton from './BasicButton';
 
 const PageableTable = ({ columns, apiCall, AdditionalFilterComponent }) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +31,12 @@ const PageableTable = ({ columns, apiCall, AdditionalFilterComponent }) => {
         <>
             {tableData != null ?
                 <Stack spacing={2} height={800} width={'100%'}>
-                    <TableFilter query={query} setQuery={setQuery} page={page} fetchData={fetchData} AdditionalFilterComponent={(props) => <AdditionalFilterComponent tableData={tableData} setTableData={setTableData} {...props} />} />
+                    <Stack direction='row' spacing={2}>
+                        <TableFilter query={query} setQuery={setQuery} page={page} fetchData={fetchData} AdditionalFilterComponent={(props) => <AdditionalFilterComponent tableData={tableData} setTableData={setTableData} {...props} />} />
+                        <div style={{ marginLeft: 'auto', alignSelf: 'center' }}>
+                            <BasicButton variant='contained' color='secondary' label='Create new' />
+                        </div>
+                    </Stack>
                     <DataGrid
                         columns={columns}
                         initialState={{
