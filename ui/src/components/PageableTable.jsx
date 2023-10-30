@@ -2,23 +2,26 @@ import { useEffect, useState } from 'react';
 import { DataGrid, GridPagination } from '@mui/x-data-grid';
 import MuiPagination from '@mui/material/Pagination';
 import { tablePaginationClasses } from '@mui/material';
+import TableSearch from './TableSearch';
 
 const PageableTable = ({ columns, apiCall }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [tableData, setTableData] = useState(null);
     // FILTER
     const [page, setPage] = useState(1);
+    const [query, setQuery] = useState('');
+
+    const fetchData = async () => {
+        try {
+            setIsLoading(true);
+            const response = await apiCall({ page, query });
+            setTableData(response);
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setIsLoading(true);
-                const response = await apiCall({ page });
-                setTableData(response);
-            } finally {
-                setIsLoading(false);
-            }
-        }
         fetchData();
     }, [page]);
 
@@ -26,6 +29,7 @@ const PageableTable = ({ columns, apiCall }) => {
         <>
             {tableData != null ?
                 <div style={{ height: 800, width: '100%' }}>
+                    <TableSearch query={query} setQuery={setQuery} page={page} fetchData={fetchData} />
                     <DataGrid
                         columns={columns}
                         initialState={{

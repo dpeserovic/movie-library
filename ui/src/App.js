@@ -3,6 +3,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import discoverService from './api/services/discoverService';
+import searchService from './api/services/searchService';
 import MovieModel from './model/MovieModel';
 import EmptyResponseModel from './model/EmptyResponseModel';
 import PageableTable from './components/PageableTable';
@@ -17,8 +18,11 @@ const MOVIE_TABLE_COLUMNS = [
 const App = () => {
   const apiCall = async (filter) => {
     try {
-      const { page } = filter;
-      const response = await discoverService.getMovies(`page=${page}`);
+      const { page, query } = filter;
+      const response = query != '' ?
+        await searchService.getMovies(`iniclude_adult=false&language=en-US&page=${page}&query=${query}`)
+        :
+        await discoverService.getMovies(`include_adult=false&include_video=false&language=en-US&page=${page}`);
       response.results = response.results.map(i => new MovieModel(i));
       if (response.total_pages > 500) response.total_pages = 500;
       return response;
