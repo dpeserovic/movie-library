@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { ModalContainer } from 'react-modal-global';
 import App from './App';
 import { setItem, getItem } from './utils/handleStorage';
 import genreService from './api/services/genreService';
+import { modalController } from './utils/modalController';
+import 'react-modal-global/styles/modal.scss';
+import 'react-modal-global/styles/layouts.scss';
 
 const initialize = async () => {
   if (getItem('genres') == null) {
@@ -19,6 +22,7 @@ const initialize = async () => {
   root.render(
     <React.StrictMode>
       <App />
+      <ModalContainer controller={modalController} />
     </React.StrictMode>
   );
 }

@@ -2,6 +2,8 @@ import { GridActionsCellItem } from '@mui/x-data-grid';
 import InfoIcon from '@mui/icons-material/Info';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { modalController } from './utils/modalController';
+import { PopupLayout } from 'react-modal-global';
 import discoverService from './api/services/discoverService';
 import searchService from './api/services/searchService';
 import MovieModel from './model/MovieModel';
@@ -13,7 +15,15 @@ const MOVIE_TABLE_COLUMNS = [
   { field: 'originalTitle', headerName: 'Title', flex: 1, disableColumnMenu: true },
   { field: 'genre', headerName: 'Genre', flex: 1, disableColumnMenu: true, sortable: false },
   { field: 'releaseDate', headerName: 'Release date', flex: 1, disableColumnMenu: true },
-  { field: 'actions', type: 'actions', getActions: (props) => [<GridActionsCellItem icon={<InfoIcon />} onClick={(e) => console.log(props)} label='Info' />, <GridActionsCellItem icon={<EditIcon />} onClick={() => console.log(props)} label='Edit' />, <GridActionsCellItem icon={<DeleteIcon />} onClick={() => console.log(props)} label='Delete' />] }
+  {
+    field: 'actions',
+    type: 'actions',
+    getActions: (props) => [
+      <GridActionsCellItem icon={<InfoIcon />} onClick={() => modalController.open(() => <PopupLayout><h1>INFO</h1></PopupLayout>, {})} label='Info' />,
+      <GridActionsCellItem icon={<EditIcon />} onClick={() => modalController.open(() => <PopupLayout><h1>EDIT</h1></PopupLayout>, {})} label='Edit' />,
+      <GridActionsCellItem icon={<DeleteIcon />} onClick={() => alert(`Delete movie with ID: ${props.id}`)} label='Delete' />
+    ]
+  }
 ];
 
 const App = () => {
