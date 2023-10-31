@@ -14,6 +14,14 @@ class MovieModel {
         const genres = getItem('genres');
         return genres.filter(i => ids.includes(i.id)).map(i => i.name).join(',');
     }
+
+    setActors = cast => {
+        this.actors = cast.map(i => i.name);
+    }
+
+    setDirectors = crew => {
+        this.directors = crew.filter(i => i.known_for_department === 'Directing' ? i.name : null).map(i => i.name);
+    }
 }
 
 export default MovieModel;
