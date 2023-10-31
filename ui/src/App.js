@@ -10,6 +10,7 @@ import MovieModel from './model/MovieModel';
 import EmptyResponseModel from './model/EmptyResponseModel';
 import PageableTable from './components/PageableTable';
 import MovieTableAdditionalFilter from './components/MovieTableAdditionalFilter';
+import MovieForm from './forms/MovieForm';
 
 const MOVIE_TABLE_COLUMNS = [
   { field: 'originalTitle', headerName: 'Title', flex: 1, disableColumnMenu: true },
@@ -44,7 +45,7 @@ const App = () => {
   }
 
   return (
-    <PageableTable columns={MOVIE_TABLE_COLUMNS} apiCall={apiCall} AdditionalFilterComponent={MovieTableAdditionalFilter} />
+    <PageableTable columns={MOVIE_TABLE_COLUMNS} apiCall={apiCall} AdditionalFilterComponent={MovieTableAdditionalFilter} CreateNewComponent={MovieForm} />
   );
 }
 

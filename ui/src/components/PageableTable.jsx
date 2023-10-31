@@ -5,8 +5,9 @@ import { tablePaginationClasses } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import TableFilter from './TableFilter';
 import BasicButton from './BasicButton';
+import { modalController } from '../utils/modalController';
 
-const PageableTable = ({ columns, apiCall, AdditionalFilterComponent }) => {
+const PageableTable = ({ columns, apiCall, AdditionalFilterComponent, CreateNewComponent }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [tableData, setTableData] = useState(null);
     // FILTER
@@ -34,7 +35,7 @@ const PageableTable = ({ columns, apiCall, AdditionalFilterComponent }) => {
                     <Stack direction='row' spacing={2}>
                         <TableFilter query={query} setQuery={setQuery} page={page} fetchData={fetchData} AdditionalFilterComponent={(props) => <AdditionalFilterComponent tableData={tableData} setTableData={setTableData} {...props} />} />
                         <div style={{ marginLeft: 'auto', alignSelf: 'center' }}>
-                            <BasicButton variant='contained' color='secondary' label='Create new' />
+                            <BasicButton variant='contained' color='secondary' label='Create new' onClick={() => modalController.open(CreateNewComponent, {})} />
                         </div>
                     </Stack>
                     <DataGrid
