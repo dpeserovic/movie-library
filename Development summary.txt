@@ -1,0 +1,4 @@
+For the practical task of creating a web application with the specified functionalities, I initially estimated that it would take 8 hours to complete.
+This estimate was based on an in-depth analysis of the project requirements and my experience with similar tasks. Upon completing the project, I found that it indeed took the full 8 hours as estimated.
+The extra time was primarily spent on reading documentation for the Material-UI (MUI) React and React Form Hook libraries. Learning and understanding these libraries added a significant amount of time to the development process.
+I aimed to be conservative with my estimate by adding a 25% margin of error and rounding up to 8 hours, it turned out to be an accurate estimate given the additional time required for learning and implementing the libraries effectively.
